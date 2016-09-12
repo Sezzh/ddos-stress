@@ -9,7 +9,7 @@
 var config = {};
 
 // Master server host and port
-config.server = 'localhost';
+config.server = 'megamente';
 config.port = 5004;
 
 

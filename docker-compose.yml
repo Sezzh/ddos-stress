@@ -1,0 +1,27 @@
+version : "2"
+services:
+  megamente:
+    build: .
+    ports:
+      - "3000:3000"
+      - "5004:5004"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - victim
+  minion:
+    command: ["node", "/usr/src/app/node.js"]
+    image: nodeddosstress_megamente:latest
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - megamente
+  victim:
+    command: ["node", "/usr/src/app/victim/app.js"]
+    image: nodeddosstress_megamente:latest
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "4444:80"
+    environment:
+      - DEBUG=express:*

